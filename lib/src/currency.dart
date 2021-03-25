@@ -104,7 +104,7 @@ class Currency {
           }
         }
         String? country = parts[4];
-        if ((country != null) && (country.length != 2)) {
+        if (country.length != 2) {
           print('Currency initialize error for ${parts[0]}. country len = '
               '${country.length}');
           country = null;

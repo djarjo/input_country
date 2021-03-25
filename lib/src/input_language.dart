@@ -78,8 +78,7 @@ class InputLanguage extends FormField<String> {
     this.showFlag = true,
     FormFieldValidator<String>? validator,
     this.withPlatformSelection = false,
-  })  : assert(enabled != null),
-        super(
+  }) : super(
             key: key,
             autovalidateMode: autovalidateMode,
             enabled: enabled,

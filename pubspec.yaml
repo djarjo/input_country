@@ -1,5 +1,5 @@
 name: input_country
-description: Countries, Languages and Currencies
+description: Countries (ISO-3166), Languages (ISO-639) and Currencies (ISO-4217) with choosers (DropdownButton) and flag images
 homepage: https://github.com/djarjo/input_country
 version: 2.0.0
 

@@ -235,6 +235,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ? window.locale
                 : supportedLocales
                     .firstWhere((locale) => (langCode == locale.languageCode));
+        // ignore: invalid_use_of_visible_for_testing_member
         thisAppsLocaleNotifier.notifyListeners();
       });
     }

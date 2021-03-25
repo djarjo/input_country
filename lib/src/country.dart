@@ -140,18 +140,18 @@ class Country {
           _langCodes.add(parts[i]);
         }
       } else {
-        int? _num3 = (parts[INDEX_NUM3] == null)
+        int? _num3 = (parts[INDEX_NUM3].isEmpty)
             ? null
             : int.tryParse(parts[INDEX_NUM3]);
-        int? _predial = (parts[INDEX_PREDIAL] == null)
+        int? _predial = (parts[INDEX_PREDIAL].isEmpty)
             ? null
             : int.tryParse(parts[INDEX_PREDIAL]);
         double? _timezone =
-            (parts[7] == null) ? null : double.tryParse(parts[7]);
+            (parts[7].isEmpty) ? null : double.tryParse(parts[7]);
         Map<String, String> _t10ns = {};
         for (int i = 0; i < _langCodes.length; i++) {
           String _t10n = parts[INDEX_TRANSLATION + i];
-          if (_t10n != null && _t10n.isNotEmpty) {
+          if (_t10n.isNotEmpty) {
             _t10ns[_langCodes[i]] = _t10n;
           }
         }
