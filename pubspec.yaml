@@ -1,0 +1,21 @@
+name: input_country
+description: Countries, Languages and Currencies
+homepage: https://github.com/djarjo/input_country
+version: 2.0.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - lib/assets/flags/

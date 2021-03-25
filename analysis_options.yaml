@@ -1,0 +1,10 @@
+# For lint rules and documentation, see http://dart-lang.github.io/linter/lints.
+# Disables warnings 'to not specify local variable type'
+linter:
+  rules:
+    omit_local_variable_types: false
+#    always_specify_types: true
+
+analyzer:
+#   exclude:
+#     - path/to/excluded/files/**
