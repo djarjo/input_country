@@ -126,7 +126,7 @@ class Country {
     _initializing = true;
     //--- Load country data
     List<String> _langCodes = [];
-    List<String> lines = csv_list_of_countries.split('\n');
+    List<String> lines = csvListOfCountries.split('\n');
     for (String line in lines) {
       if (line.isEmpty) {
         continue;

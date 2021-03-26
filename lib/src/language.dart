@@ -82,7 +82,7 @@ class Language {
     _initializing = true;
     //--- Load language data
     List<String> _langCodes = [];
-    List<String> lines = csv_list_of_languages.split('\n');
+    List<String> lines = csvListOfLanguages.split('\n');
     for (String line in lines) {
       if (line.isEmpty) {
         continue;

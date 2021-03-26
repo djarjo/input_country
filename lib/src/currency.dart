@@ -82,7 +82,7 @@ class Currency {
     _initializing = true;
     //--- Load currency data
     List<String> _langCodes = [];
-    List<String> lines = csv_list_of_currencies.split('\n');
+    List<String> lines = csvListOfCurrencies.split('\n');
     for (String line in lines) {
       if (line.isEmpty) {
         continue;

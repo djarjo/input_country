@@ -8,7 +8,7 @@
 /// The text is just a csv file with a header row and each currency on one line.
 /// To add a translation add a column with language code in the header row.
 /// The new language will be used automatically.
-String csv_list_of_currencies = '''
+String csvListOfCurrencies = '''
 alpha-3,name,minor,symbol,country,de,es
 AED,UAE Dirham,2,,AE,,
 AFN,Afghani,2,,AF,,

@@ -46,7 +46,7 @@ class InputCurrency extends FormField<String> {
     this.disabledHint,
     this.dropdownColor,
     this.elevation,
-    enabled = true,
+    bool enabled = true,
     this.focusColor,
     this.focusNode,
     this.hint,
@@ -67,8 +67,7 @@ class InputCurrency extends FormField<String> {
     this.style,
     this.underline,
     FormFieldValidator<String>? validator,
-  })  : assert(enabled != null),
-        super(
+  }) : super(
             key: key,
             autovalidateMode: autovalidateMode,
             enabled: enabled,
@@ -104,8 +103,8 @@ class InputCurrency extends FormField<String> {
               //--- Build list of currencies
               List<DropdownMenuItem<String>> _buildCurrencyList(
                   String langCode) {
-                List<Currency> currencies = [];
-                List<String> filter = [];
+                List<Currency> currencies = <Currency>[];
+                List<String> filter = <String>[];
                 //--- Prepare filter
                 if (selectableCurrencies != null) {
                   filter.addAll(selectableCurrencies);
@@ -116,12 +115,13 @@ class InputCurrency extends FormField<String> {
                     currencies.add(currency);
                   }
                 }
-                currencies.sort((currency1, currency2) => currency1
-                    .getTranslation(langCode)
-                    .compareTo(currency2.getTranslation(langCode)));
+                currencies.sort((Currency currency1, Currency currency2) =>
+                    currency1
+                        .getTranslation(langCode)
+                        .compareTo(currency2.getTranslation(langCode)));
                 return currencies
                     .map(
-                      (currency) => DropdownMenuItem(
+                      (Currency currency) => DropdownMenuItem<String>(
                         value: currency.code,
                         child: _buildDisplayItem(currency, langCode),
                       ),
@@ -166,7 +166,7 @@ class InputCurrency extends FormField<String> {
                 isExpanded: isExpanded,
                 items: currencyList,
                 itemHeight: itemHeight,
-                onChanged: enabled ? (v) => _onChanged(v) : null,
+                onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
                 style: style,
                 underline: underline,

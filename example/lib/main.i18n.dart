@@ -44,11 +44,11 @@ extension Localization on String {
 
   String localize(String english, Map<String, Map<String, String>> t10ns) {
     if (langCode != 'en') {
-      Map<String, String> _t10ns = t10ns[english];
+      Map<String, String>? _t10ns = t10ns[english];
       if (_t10ns == null) {
         print('No translations found for "$english"');
       } else {
-        String translated = _t10ns[langCode];
+        String? translated = _t10ns[langCode];
         if (translated == null) {
           print('Translation to language "$langCode" missing for "$english"');
         } else {

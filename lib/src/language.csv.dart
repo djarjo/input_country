@@ -8,7 +8,7 @@
 /// The text is just a csv file with a header row and each language on one line.
 /// To add a translation add a column with language code in the header row.
 /// The new language will be used automatically.
-String csv_list_of_languages = '''
+String csvListOfLanguages = '''
 alpha-2,name,country,de,es,fr,it
 de,german,DE,deutsch,alemán,allemand,tedesco 
 en,english,GB,englisch,inglés,anglais,inglese 

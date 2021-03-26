@@ -6,7 +6,7 @@
 /// The text is just a csv file with a header row and each country on one line.
 /// To add a translation add a column with language code in the header row.
 /// The new language will be used automatically.
-String csv_list_of_countries = '''
+String csvListOfCountries = '''
 alpha-2,alpha-3,num-3,name,currency,language,predial,timezone,de,es
 AD,AND,20,Andorra,EUR,en,376,1,Andorra,Andorra
 AE,ARE,784,United Arab Emirates,AED,ar,971,4,Vereinigte Arabische Emirate,Emiratos Árabes Unidos

@@ -114,15 +114,15 @@ class InputLanguage extends FormField<String> {
               //--- Build list of languages
               List<DropdownMenuItem<String>> _buildLanguageList(
                   String langCode) {
-                List<Language> languages = [];
-                List<String> filter = [];
+                List<Language> languages = <Language>[];
+                List<String> filter = <String>[];
                 //--- Prepare filter
                 if (selectableLanguages != null) {
                   filter.addAll(selectableLanguages);
                 }
                 if (supportedLocales != null) {
-                  supportedLocales
-                      .forEach((locale) => filter.add(locale.languageCode));
+                  supportedLocales.forEach(
+                      (Locale locale) => filter.add(locale.languageCode));
                 }
                 //--- Build list of codes. Apply filter
                 for (Language lang in Language.values()) {
@@ -130,7 +130,7 @@ class InputLanguage extends FormField<String> {
                     languages.add(lang);
                   }
                 }
-                languages.sort((lang1, lang2) => lang1
+                languages.sort((Language lang1, Language lang2) => lang1
                     .getTranslation(langCode)
                     .compareTo(lang2.getTranslation(langCode)));
                 if (withPlatformSelection) {
@@ -138,7 +138,7 @@ class InputLanguage extends FormField<String> {
                 }
                 return languages
                     .map(
-                      (language) => DropdownMenuItem(
+                      (Language language) => DropdownMenuItem<String>(
                         value: language.code,
                         child: _buildDisplayItem(language, langCode),
                       ),
@@ -183,7 +183,7 @@ class InputLanguage extends FormField<String> {
                 isExpanded: isExpanded,
                 items: languageList,
                 itemHeight: itemHeight,
-                onChanged: enabled ? (v) => _onChanged(v) : null,
+                onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
                 style: style,
                 underline: underline,

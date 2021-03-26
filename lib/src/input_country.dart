@@ -113,8 +113,8 @@ class InputCountry extends FormField<String> {
               //--- Build list of countries
               List<DropdownMenuItem<String>> _buildCountryList(
                   String langCode) {
-                List<Country> countries = [];
-                List<String> filter = [];
+                List<Country> countries = <Country>[];
+                List<String> filter = <String>[];
                 //--- Prepare filter
                 if (selectableCountries != null) {
                   filter.addAll(selectableCountries);
@@ -125,12 +125,12 @@ class InputCountry extends FormField<String> {
                     countries.add(country);
                   }
                 }
-                countries.sort((country1, country2) => country1
+                countries.sort((Country country1, Country country2) => country1
                     .getTranslation(langCode)
                     .compareTo(country2.getTranslation(langCode)));
                 return countries
                     .map(
-                      (country) => DropdownMenuItem(
+                      (Country country) => DropdownMenuItem<String>(
                         value: country.alpha2,
                         child: _buildDisplayItem(country, langCode),
                       ),
@@ -175,7 +175,7 @@ class InputCountry extends FormField<String> {
                 isExpanded: isExpanded,
                 items: countryList,
                 itemHeight: itemHeight,
-                onChanged: enabled ? (v) => _onChanged(v) : null,
+                onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
                 style: style,
                 underline: underline,
