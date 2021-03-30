@@ -93,15 +93,17 @@ class InputCountry extends FormField<String> {
                 return Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    (showFlag)
-                        ? Image.asset(
-                            IMAGE_PATH + country.alpha2 + '.png',
-                            package: 'input_country',
-                          )
-                        : SizedBox.shrink(),
+                    if (showFlag)
+                      Padding(
+                        padding: EdgeInsets.only(right: 10.0),
+                        child: Image.asset(
+                          IMAGE_PATH + country.alpha2 + '.png',
+                          package: 'input_country',
+                        ),
+                      ),
                     Flexible(
                       child: Text(
-                        '  ' + country.getTranslation(langCode),
+                        country.getTranslation(langCode),
                         overflow: TextOverflow.ellipsis,
                         softWrap: true,
                       ),

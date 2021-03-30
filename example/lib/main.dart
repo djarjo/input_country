@@ -58,11 +58,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _countryCode1 = '',
-      _currencyCode1 = '',
-      _languageCode1 = '',
-      _countryCode2 = '',
-      _currencyCode2 = '';
+  String? _countryCode1,
+      _currencyCode1,
+      _languageCode1,
+      _countryCode2,
+      _currencyCode2;
   String _languageCode2 = window.locale.languageCode;
 
   @override
@@ -123,10 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
             TableRow(
               children: [
                 Text('Countries'.i18n),
-                InputCountry(
-                  initialValue: _countryCode1,
-                  onChanged: (String? newCode) =>
-                      setState(() => _countryCode1 = newCode ?? ''),
+                Flexible(
+                  child: InputCountry(
+                    initialValue: _countryCode1,
+                    onChanged: (String? newCode) =>
+                        setState(() => _countryCode1 = newCode),
+                  ),
                 ),
                 Text('$_countryCode1'),
               ],
@@ -137,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 InputCurrency(
                   initialValue: _currencyCode1,
                   onChanged: (String? newCode) =>
-                      setState(() => _currencyCode1 = newCode ?? ''),
+                      setState(() => _currencyCode1 = newCode),
                 ),
                 Text('$_currencyCode1'),
               ],
@@ -147,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
               InputLanguage(
                 initialValue: _languageCode1,
                 onChanged: (String? newCode) =>
-                    setState(() => _languageCode1 = newCode ?? ''),
+                    setState(() => _languageCode1 = newCode),
                 withPlatformSelection: true,
               ),
               Text('$_languageCode1'),
@@ -191,7 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 InputCountry(
                   initialValue: _countryCode2,
                   onChanged: (String? newCode) =>
-                      setState(() => _countryCode2 = newCode ?? ''),
+                      setState(() => _countryCode2 = newCode),
                   selectableCountries: _selectableCountries,
                 ),
                 Text('$_countryCode2'),
@@ -203,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 InputCurrency(
                   initialValue: _currencyCode2,
                   onChanged: (String? newCode) =>
-                      setState(() => _currencyCode2 = newCode ?? ''),
+                      setState(() => _currencyCode2 = newCode),
                   selectableCurrencies: _selectableCurrencies,
                 ),
                 Text('$_currencyCode2'),
@@ -213,8 +215,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Text('Languages'.i18n),
               InputLanguage(
                 initialValue: _languageCode2,
-                onChanged: (String? langCode) =>
-                    _setNewLanguage(langCode ?? ''),
+                onChanged: (String? langCode) => _setNewLanguage(
+                    langCode ?? Language.LANG_CODE_FROM_PLATFORM),
                 supportedLocales: supportedLocales,
                 withPlatformSelection: true,
               ),

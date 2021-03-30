@@ -47,7 +47,7 @@ BY,BLR,112,Belarus,BYN,ru,375,3,Belarus,Bielorrusia
 BZ,BLZ,84,Belize,BZD,en,501,-6,Belize,Belice
 CA,CAN,124,Canada,CAD,en,1,-5,Kanada,Canadá
 CC,CCK,166,Cocos (Keeling) Islands,AUD,en,6189162,6.5,,
-CD,COD,180,Democratic Republic Congo,CDF,fr,243,1,Demokratische Republik Kongo,República Democrática del Congo
+CD,COD,180,Congo Democratic Republic,CDF,fr,243,1,Demokratische Republik Kongo,República Democrática del Congo
 CF,CAF,140,Central African Republic,XAF,fr,236,1,Zentral­afrikanische Republik,República Centroafricana
 CG,COG,178,Congo,XAF,fr,242,1,Kongo,República del Congo
 CH,CHE,756,Switzerland,CHF,de,41,1,Schweiz,Suiza
@@ -79,8 +79,8 @@ ES,ESP,724,Spain,EUR,es,34,1,Spanien,España
 ET,ETH,231,Ethiopia,ETB,so,251,3,Äthiopien,Etiopía
 FI,FIN,246,Finland,EUR,en,358,2,Finnland,Finlandia
 FJ,FJI,242,Fiji,FJD,en,679,12,Fidschi,Fiyi
-FK,FLK,238,Falkland Islands (Malvinas),FKP,en,500,-3,,
-FM,FSM,583,Micronesia (Federated States of),USD,en,691,10,Mikronesien,Micronesia
+FK,FLK,238,Falkland Islands,FKP,en,500,-3,,
+FM,FSM,583,Micronesia,USD,en,691,10,Mikronesien,Micronesia
 FO,FRO,234,Faroe Islands,DKK,fo,298,1,,
 FR,FRA,250,France,EUR,fr,33,1,Frankreich,Francia
 GA,GAB,266,Gabon,XAF,fr,241,1,Gabun,Gabón
@@ -97,13 +97,13 @@ GN,GIN,324,Guinea,GNF,pt,224,0,Guinea,Guinea
 GP,GLP,312,Guadeloupe,EUR,es,590,-4,,
 GQ,GNQ,226,Equatorial Guinea,XAF,fr,240,1,Äquatorialguinea,Guinea Ecuatorial
 GR,GRC,300,Greece,EUR,gr,30,2,Griechenland,Grecia
-GS,SGS,239,South Georgia and Sandwich Islands,,,500,-2,,
+GS,SGS,239,South Georgia Islands,,,500,-2,,
 GT,GTM,320,Guatemala,GTQ,es,502,-6,Guatemala,Guatemala
 GU,GUM,316,Guam,USD,en,1671,10,,
 GW,GNB,624,Guinea-Bissau,XOF,pt,245,0,Guinea-Bissau,Guinea-Bisáu
 GY,GUY,328,Guyana,GYD,en,592,-4,Guyana,Guyana
 HK,HKG,344,Hong Kong,HKD,zh,852,8,,
-HM,HMD,334,Heard and McDonald Islands,AUD,,,,,
+HM,HMD,334,Heard McDonald Islands,AUD,,,,,
 HN,HND,340,Honduras,HNL,es,504,-6,Honduras,Honduras
 HR,HRV,191,Croatia,HRK,hr,385,1,Kroatien,Croacia
 HT,HTI,332,Haiti,HTG,es,509,-5,Haiti,Haití
@@ -113,7 +113,7 @@ IE,IRL,372,Ireland,EUR,en,353,0,Irland,Irlanda
 IL,ISR,376,Israel,ILS,en,972,2,Israel,Israel
 IM,IMN,833,Isle of Man,GBP,en,44,0,,
 IN,IND,356,India,INR,en,91,5.5,Indien,India
-IO,IOT,86,British Indian Ocean Territory,USD,en,246,6,,
+IO,IOT,86,Indian Ocean Territory,USD,en,246,6,,
 IQ,IRQ,368,Iraq,IQD,ar,964,3,Irak,Irak
 IR,IRN,364,Iran,IRR,ar,98,3.5,Iran,Irán
 IS,ISL,352,Iceland,ISK,en,354,0,Island,Islandia
@@ -148,7 +148,7 @@ MA,MAR,504,Morocco,MAD,fr,212,0,Marokko,Marruecos
 MC,MCO,492,Monaco,EUR,fr,377,1,Monaco,Mónaco
 MD,MDA,498,Moldova,MDL,ru,373,2,Moldau,Moldavia
 ME,MNE,499,Montenegro,EUR,en,382,1,Montenegro,Montenegro
-MF,MAF,663,Saint Martin (French part),EUR,fr,590,-4,,
+MF,MAF,663,Saint Martin,EUR,fr,590,-4,,
 MG,MDG,450,Madagascar,MGA,en,261,3,Madagaskar,Madagascar
 MH,MHL,584,Marshall Islands,USD,en,692,12,Marshallinseln,Islas Marshall
 MK,MKD,807,North Macedonia,MKD,sq,,,Nordmazedonien,Macedonia del Norte
@@ -218,7 +218,7 @@ SR,SUR,740,Suriname,SRD,nl,597,-3,Suriname,Surinam
 SS,SSD,728,South Sudan,SSP,ar,211,3,Südsudan,Sudán del Sur
 ST,STP,678,Sao Tome and Principe,STN,pt,239,0,São Tomé und Príncipe,Santo Tomé y Príncipe
 SV,SLV,222,El Salvador,SVC,es,503,-6,El Salvador,El Salvador
-SX,SXM,534,Sint Maarten (Netherlands),ANG,nl,1721,-4,,
+SX,SXM,534,Sint Maarten,ANG,nl,1721,-4,,
 SY,SYR,760,Syrian,SYP,ar,963,2,Syrien,Siria
 SZ,SWZ,748,Eswatini,SZL,en,,,Eswatini,Suazilandia
 TC,TCA,796,Turks and Caicos Islands,USD,es,1649,-5,,
@@ -243,7 +243,7 @@ US,USA,840,United States of America,USD,en,1,-7,U.S.A.,Estados Unidos
 UY,URY,858,Uruguay,UYU,es,598,-3,Uruguay,Uruguay
 UZ,UZB,860,Uzbekistan,UZS,uz,998,5,Usbekistan,Uzbekistán
 VA,VAT,336,Holy See,EUR,,,,Vatikan,
-VC,VCT,670,Saint Vincent and the Grenadines,XCD,es,1784,-4,St. Vincent und die Grenadinen,San Vicente y las Granadinas
+VC,VCT,670,Saint Vincent & Grenadines,XCD,es,1784,-4,St. Vincent & Grenadinen,San Vicente y Granadinas
 VE,VEN,862,Venezuela,VES,es,58,-4,Venezuela,Venezuela
 VG,VGB,92,Virgin Islands (British),USD,en,,,Jungferninseln (England),
 VI,VIR,850,Virgin Islands (U.S.),USD,en,1340,-4,Jungferninseln (U.S.),
