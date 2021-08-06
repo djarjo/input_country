@@ -31,8 +31,16 @@ class InputCurrency extends FormField<String> {
   /// `null` will show full list.
   final List<String>? selectableCurrencies;
 
-  /// `false` will not show the flag icon. Default is `true`.
-  final bool showFlag;
+  /// `true` will show country flags in selection list.
+  /// Default is `false`.
+  ///
+  /// Ensure sufficient horizontal space to show flags on items!
+  final bool showFlagOnItems;
+
+  /// 'false' will NOT show flag in selected country.
+  /// Default is `true`.
+  final bool showFlagOnSelection;
+
   final TextStyle? style;
   final Widget? underline;
 
@@ -56,14 +64,15 @@ class InputCurrency extends FormField<String> {
     this.iconSize = 24.0,
     String? initialValue,
     this.isDense = false,
-    this.isExpanded = false,
+    this.isExpanded = true,
     this.itemHeight = kMinInteractiveDimension,
     Locale? locale,
     this.onChanged,
     FormFieldSetter<String>? onSaved,
     this.onTap,
     this.selectableCurrencies,
-    this.showFlag = true,
+    this.showFlagOnItems = false,
+    this.showFlagOnSelection = true,
     this.style,
     this.underline,
     FormFieldValidator<String>? validator,
@@ -75,34 +84,9 @@ class InputCurrency extends FormField<String> {
             onSaved: onSaved,
             validator: validator,
             builder: (FormFieldState<String> state) {
-              //--- Builds one country for display
-              Widget _buildDisplayItem(Currency? currency, String langCode) {
-                if (currency == null) {
-                  return Text('');
-                }
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    (showFlag && (currency.country != null))
-                        ? Image.asset(
-                            IMAGE_PATH + currency.country! + '.png',
-                            package: 'input_country',
-                          )
-                        : SizedBox.shrink(),
-                    Flexible(
-                      child: Text(
-                        '  ' + currency.getTranslation(langCode),
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                      ),
-                    ),
-                  ],
-                );
-              }
-
               //--- Build list of currencies
               List<DropdownMenuItem<String>> _buildCurrencyList(
-                  String langCode) {
+                  String langCode, bool showFlag) {
                 List<Currency> currencies = <Currency>[];
                 List<String> filter = <String>[];
                 //--- Prepare filter
@@ -123,7 +107,7 @@ class InputCurrency extends FormField<String> {
                     .map(
                       (Currency currency) => DropdownMenuItem<String>(
                         value: currency.code,
-                        child: _buildDisplayItem(currency, langCode),
+                        child: _buildItem(currency, langCode, showFlag),
                       ),
                     )
                     .toList();
@@ -141,15 +125,11 @@ class InputCurrency extends FormField<String> {
                   locale ?? Localizations.localeOf(state.context);
               String langToUse = localeToUse.languageCode;
 
-              /// List of translated currency names
-              List<DropdownMenuItem<String>> currencyList =
-                  _buildCurrencyList(langToUse);
-
               return DropdownButton<String>(
                 autofocus: autofocus,
                 disabledHint: disabledHint ??
-                    _buildDisplayItem(
-                        Currency.findByCode(state.value), langToUse),
+                    _buildItem(Currency.findByCode(state.value), langToUse,
+                        showFlagOnSelection),
                 dropdownColor: dropdownColor,
                 elevation: elevation ?? 8,
                 focusColor: focusColor,
@@ -164,13 +144,46 @@ class InputCurrency extends FormField<String> {
                 iconSize: iconSize,
                 isDense: isDense,
                 isExpanded: isExpanded,
-                items: currencyList,
+                items: _buildCurrencyList(langToUse, showFlagOnItems),
                 itemHeight: itemHeight,
                 onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
+                selectedItemBuilder: (BuildContext ctx) =>
+                    _buildCurrencyList(langToUse, showFlagOnSelection),
                 style: style,
                 underline: underline,
                 value: state.value,
               );
             });
+
+  //--- Builds one country for display
+  static Widget _buildItem(Currency? currency, String langCode, bool showFlag) {
+    if (currency == null) {
+      return Text('');
+    }
+    return showFlag
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              (showFlag && (currency.country != null))
+                  ? Image.asset(
+                      IMAGE_PATH + currency.country! + '.png',
+                      package: 'input_country',
+                    )
+                  : SizedBox.shrink(),
+              Flexible(
+                child: Text(
+                  '  ' + currency.getTranslation(langCode),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
+              ),
+            ],
+          )
+        : Text(
+            currency.getTranslation(langCode),
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+          );
+  }
 }

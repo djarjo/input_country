@@ -17,7 +17,6 @@ import 'country.dart';
 /// * [DropdownButton] for most of the parameters here
 class InputCountry extends FormField<String> {
   static const String IMAGE_PATH = 'lib/assets/flags/';
-
   final bool autofocus;
   final Widget? disabledHint;
   final Color? dropdownColor;
@@ -41,8 +40,15 @@ class InputCountry extends FormField<String> {
 
   final Widget? underline;
 
-  /// `false` will not show country flags.
-  final bool showFlag;
+  /// `true` will show country flags in selection list.
+  /// Default is `false`.
+  ///
+  /// Ensure sufficient horizontal space to show flags on items!
+  final bool showFlagOnItems;
+
+  /// 'false' will NOT show flag in selected country.
+  /// Default is `true`.
+  final bool showFlagOnSelection;
 
   /// Dropdown button to select a country.
   /// Set `showFlag = false` to hide flag images for countries.
@@ -65,14 +71,15 @@ class InputCountry extends FormField<String> {
     this.iconSize = 24.0,
     String? initialValue,
     this.isDense = false,
-    this.isExpanded = false,
+    this.isExpanded = true,
     this.itemHeight = kMinInteractiveDimension,
     Locale? locale,
     this.onChanged,
     FormFieldSetter<String>? onSaved,
     this.onTap,
     this.selectableCountries,
-    this.showFlag = true,
+    this.showFlagOnItems = false,
+    this.showFlagOnSelection = true,
     this.style,
     this.underline,
     FormFieldValidator<String>? validator,
@@ -84,37 +91,9 @@ class InputCountry extends FormField<String> {
             onSaved: onSaved,
             validator: validator,
             builder: (FormFieldState<String> state) {
-              //--- Builds one country for display
-              Widget _buildDisplayItem(Country? country, String langCode) {
-                // could happen to display disabledHint
-                if (country == null) {
-                  return Text('');
-                }
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    if (showFlag)
-                      Padding(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Image.asset(
-                          IMAGE_PATH + country.alpha2 + '.png',
-                          package: 'input_country',
-                        ),
-                      ),
-                    Flexible(
-                      child: Text(
-                        country.getTranslation(langCode),
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                      ),
-                    ),
-                  ],
-                );
-              }
-
               //--- Build list of countries
               List<DropdownMenuItem<String>> _buildCountryList(
-                  String langCode) {
+                  String langCode, bool showFlag) {
                 List<Country> countries = <Country>[];
                 List<String> filter = <String>[];
                 //--- Prepare filter
@@ -134,7 +113,7 @@ class InputCountry extends FormField<String> {
                     .map(
                       (Country country) => DropdownMenuItem<String>(
                         value: country.alpha2,
-                        child: _buildDisplayItem(country, langCode),
+                        child: _buildItem(country, langCode, showFlag),
                       ),
                     )
                     .toList();
@@ -152,15 +131,11 @@ class InputCountry extends FormField<String> {
                   locale ?? Localizations.localeOf(state.context);
               String langToUse = localeToUse.languageCode;
 
-              /// List of translated country names
-              List<DropdownMenuItem<String>> countryList =
-                  _buildCountryList(langToUse);
-
               return DropdownButton<String>(
                 autofocus: autofocus,
                 disabledHint: disabledHint ??
-                    _buildDisplayItem(
-                        Country.findByCode2(state.value), langToUse),
+                    _buildItem(Country.findByCode2(state.value), langToUse,
+                        showFlagOnSelection),
                 dropdownColor: dropdownColor,
                 elevation: elevation ?? 8,
                 focusColor: focusColor,
@@ -175,13 +150,48 @@ class InputCountry extends FormField<String> {
                 iconSize: iconSize,
                 isDense: isDense,
                 isExpanded: isExpanded,
-                items: countryList,
+                items: _buildCountryList(langToUse, showFlagOnItems),
                 itemHeight: itemHeight,
                 onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
+                selectedItemBuilder: (BuildContext ctx) =>
+                    _buildCountryList(langToUse, showFlagOnSelection),
                 style: style,
                 underline: underline,
                 value: state.value,
               );
             });
+
+  //--- Builds one country for display
+  static Widget _buildItem(Country? country, String langCode, bool showFlag) {
+    // could happen to display disabledHint
+    if (country == null) {
+      return Text('');
+    }
+    return showFlag
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Image.asset(
+                  IMAGE_PATH + country.alpha2 + '.png',
+                  package: 'input_country',
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  country.getTranslation(langCode),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: false,
+                ),
+              ),
+            ],
+          )
+        : Text(
+            country.getTranslation(langCode),
+            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+          );
+  }
 }

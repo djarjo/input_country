@@ -11,20 +11,20 @@ alpha-2,alpha-3,num-3,name,currency,language,predial,timezone,de,es
 AD,AND,20,Andorra,EUR,en,376,1,Andorra,Andorra
 AE,ARE,784,United Arab Emirates,AED,ar,971,4,Vereinigte Arabische Emirate,Emiratos Árabes Unidos
 AF,AFG,4,Afghanistan,AFN,fa,93,4.5,Afghanistan,Afganistán
-AG,ATG,28,Antigua and Barbuda,XCD,en,1268,-4,Antigua und Barbuda,Antigua y Barbuda
+AG,ATG,28,Antigua & Barbuda,XCD,en,1268,-4,Antigua & Barbuda,Antigua y Barbuda
 AI,AIA,660,Anguilla,XCD,en,1264,-4,,
 AL,ALB,8,Albania,ALL,en,355,1,Albanien,Albania
 AM,ARM,51,Armenia,AMD,hy,374,4,Armenien,Armenia
 AO,AGO,24,Angola,AOA,pt,244,1,Angola,Angola
-AQ,ATA,10,Antarctica,,,,,,
+AQ,ATA,10,Antarctica,,,,,Antarktis,
 AR,ARG,32,Argentina,ARS,es,54,-3,Argentinien,Argentina
-AS,ASM,16,American Samoa,USD,en,1684,-11,,
+AS,ASM,16,American Samoa,USD,en,1684,-11,Amerikanisch Samoa,
 AT,AUT,40,Austria,EUR,de,43,1,Österreich,Austria
 AU,AUS,36,Australia,AUD,en,61,9,Australien,Australia
 AW,ABW,533,Aruba,AWG,es,297,-4,,
 AX,ALA,248,Åland Islands,EUR,sv,35818,2,,
 AZ,AZE,31,Azerbaijan,AZN,az,994,4,Aserbaidschan,Azerbaiyán
-BA,BIH,70,Bosnia and Herzegovina,MA,hr,387,1,Bosnien und Herzegowina,Bosnia y Herzegovina
+BA,BIH,70,Bosnia & Herzegovina,MA,hr,387,1,Bosnien & Herzegowina,Bosnia y Herzegovina
 BB,BRB,52,Barbados,BBD,en,1246,-4,Barbados,Barbados
 BD,BGD,50,Bangladesh,BDT,en,880,6,Bangladesch,Bangladés
 BE,BEL,56,Belgium,EUR,nl,32,1,Belgien,Bélgica
@@ -46,9 +46,9 @@ BW,BWA,72,Botswana,BWP,en,267,2,Botswana,Botsuana
 BY,BLR,112,Belarus,BYN,ru,375,3,Belarus,Bielorrusia
 BZ,BLZ,84,Belize,BZD,en,501,-6,Belize,Belice
 CA,CAN,124,Canada,CAD,en,1,-5,Kanada,Canadá
-CC,CCK,166,Cocos (Keeling) Islands,AUD,en,6189162,6.5,,
+CC,CCK,166,Cocos Islands,AUD,en,6189162,6.5,,Kokosinseln
 CD,COD,180,Congo Democratic Republic,CDF,fr,243,1,Demokratische Republik Kongo,República Democrática del Congo
-CF,CAF,140,Central African Republic,XAF,fr,236,1,Zentral­afrikanische Republik,República Centroafricana
+CF,CAF,140,Central African Republic,XAF,fr,236,1,Zentralafrikanische Republik,República Centroafricana
 CG,COG,178,Congo,XAF,fr,242,1,Kongo,República del Congo
 CH,CHE,756,Switzerland,CHF,de,41,1,Schweiz,Suiza
 CI,CIV,384,Côte d'Ivoire,XOF,fr,225,0,Elfenbeinküste,Costa de Marfil
@@ -127,7 +127,7 @@ KG,KGZ,417,Kyrgyzstan,KGS,ru,996,5,Kirgisistan,Kirguistán
 KH,KHM,116,Cambodia,KHR,km,855,7,Kambodscha,Camboya
 KI,KIR,296,Kiribati,AUD,en,686,13,Kiribati,Kiribati
 KM,COM,174,Comoros,KMF,fr,269,3,Komoren,Comoras
-KN,KNA,659,Saint Kitts and Nevis,XCD,ees,1869,-4,St. Kitts und Nevis,San Cristóbal y Nieves
+KN,KNA,659,Saint Kitts & Nevis,XCD,ees,1869,-4,St. Kitts & Nevis,San Cristóbal y Nieves
 KP,PRK,408,North Korea,KPW,,850,8.5,Nord-Korea,Corea del Norte
 KR,KOR,410,South Korea,KRW,,82,9,Süd-Korea,Corea del Sur
 KW,KWT,414,Kuwait,KWD,ar,965,3,Kuwait,Kuwait
@@ -187,7 +187,7 @@ PG,PNG,598,Papua New Guinea,PGK,en,675,10,Papua-Neuguinea,Papúa Nueva Guinea
 PH,PHL,608,Philippines,PHP,es,63,8,Philippinen,Filipinas
 PK,PAK,586,Pakistan,USD,en,92,5,Pakistan,Pakistán
 PL,POL,616,Poland,PLN,pl,48,1,Polen,Polonia
-PM,SPM,666,Saint Pierre and Miquelon,EUR,fr,508,-3,,
+PM,SPM,666,St. Pierre & Miquelon,EUR,fr,508,-3,,
 PN,PCN,612,Pitcairn,NZD,en,64,-8,,
 PR,PRI,630,Puerto Rico,USD,es,1787,-4,,
 PS,PSE,275,Palestine,PAB,ar,970,2,Palästina,
@@ -208,7 +208,7 @@ SE,SWE,752,Sweden,SEK,sv,46,1,Schweden,Suecia
 SG,SGP,702,Singapore,SGD,zh,65,8,Singapur,Singapur
 SH,SHN,654,Saint Helena,SHP,en,290,0,St. Helena,
 SI,SVN,705,Slovenia,EUR,sl,386,1,Slowenien,Eslovenia
-SJ,SJM,744,Svalbard and Jan Mayen,NOK,nb,4779,1,,
+SJ,SJM,744,Svalbard & Jan Mayen,NOK,nb,4779,1,,
 SK,SVK,703,Slovakia,EUR,sk,421,1,Slowakei,Eslovaquia
 SL,SLE,694,Sierra Leone,SLL,en,232,0,Sierra Leone,Sierra Leona
 SM,SMR,674,San Marino,EUR,it,378,1,San Marino,San Marino
@@ -216,7 +216,7 @@ SN,SEN,686,Senegal,XOF,fr,221,0,Senegal,Senegal
 SO,SOM,706,Somalia,SOS,ar,252,3,Somalia,Somalia
 SR,SUR,740,Suriname,SRD,nl,597,-3,Suriname,Surinam
 SS,SSD,728,South Sudan,SSP,ar,211,3,Südsudan,Sudán del Sur
-ST,STP,678,Sao Tome and Principe,STN,pt,239,0,São Tomé und Príncipe,Santo Tomé y Príncipe
+ST,STP,678,Sao Tome & Principe,STN,pt,239,0,,Santo Tomé y Príncipe
 SV,SLV,222,El Salvador,SVC,es,503,-6,El Salvador,El Salvador
 SX,SXM,534,Sint Maarten,ANG,nl,1721,-4,,
 SY,SYR,760,Syrian,SYP,ar,963,2,Syrien,Siria
@@ -233,7 +233,7 @@ TM,TKM,795,Turkmenistan,TMT,tk,993,5,Turkmenistan,Turkmenistán
 TN,TUN,788,Tunisia,TND,fr,216,1,Tunesien,Túnez
 TO,TON,776,Tonga,TOP,en,676,13,Tonga,Tonga
 TR,TUR,792,Turkey,TRY,tr,90,3,Türkei,Turquía
-TT,TTO,780,Trinidad and Tobago,TTD,es,1868,-4,Trinidad und Tobago,Trinidad y Tobago
+TT,TTO,780,Trinidad & Tobago,TTD,es,1868,-4,Trinidad & Tobago,Trinidad y Tobago
 TV,TUV,798,Tuvalu,AUD,en,688,12,Tuvalu,Tuvalu
 TW,TWN,158,Taiwan,TWD,zh,886,8,Taiwan,
 TZ,TZA,834,Tanzania,TZS,sw,255,3,Tansania,Tanzania
@@ -243,10 +243,10 @@ US,USA,840,United States of America,USD,en,1,-7,U.S.A.,Estados Unidos
 UY,URY,858,Uruguay,UYU,es,598,-3,Uruguay,Uruguay
 UZ,UZB,860,Uzbekistan,UZS,uz,998,5,Usbekistan,Uzbekistán
 VA,VAT,336,Holy See,EUR,,,,Vatikan,
-VC,VCT,670,Saint Vincent & Grenadines,XCD,es,1784,-4,St. Vincent & Grenadinen,San Vicente y Granadinas
+VC,VCT,670,Saint Vincent & Grenadines,XCD,es,1784,-4,St. Vincent & Grenadinen,San Vicente y Grenadinas
 VE,VEN,862,Venezuela,VES,es,58,-4,Venezuela,Venezuela
-VG,VGB,92,Virgin Islands (British),USD,en,,,Jungferninseln (England),
-VI,VIR,850,Virgin Islands (U.S.),USD,en,1340,-4,Jungferninseln (U.S.),
+VG,VGB,92,Virgin Islands (GB),USD,en,,,Jungferninseln (GB),
+VI,VIR,850,Virgin Islands (US),USD,en,1340,-4,Jungferninseln (US),
 VN,VNM,704,Vietnam,VND,vi,84,7,Vietnam,Vietnam
 VU,VUT,548,Vanuatu,VUV,fr,678,11,Vanuatu,Vanuatu
 WF,WLF,876,Wallis and Futuna,XPF,fr,681,12,,

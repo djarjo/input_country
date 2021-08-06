@@ -123,12 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
             TableRow(
               children: [
                 Text('Countries'.i18n),
-                Flexible(
-                  child: InputCountry(
-                    initialValue: _countryCode1,
-                    onChanged: (String? newCode) =>
-                        setState(() => _countryCode1 = newCode),
-                  ),
+                InputCountry(
+                  showFlagOnSelection: true,
+                  showFlagOnItems: true,
+                  initialValue: _countryCode1,
+                  onChanged: (String? newCode) =>
+                      setState(() => _countryCode1 = newCode),
                 ),
                 Text('$_countryCode1'),
               ],
