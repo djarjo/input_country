@@ -65,7 +65,7 @@ class InputLanguage extends FormField<String> {
     this.iconSize = 24.0,
     String? initialValue,
     this.isDense = false,
-    this.isExpanded = false,
+    this.isExpanded = true,
     this.itemHeight = kMinInteractiveDimension,
     Locale? locale,
     this.onChanged,
