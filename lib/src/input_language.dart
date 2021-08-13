@@ -7,8 +7,9 @@ import 'language.dart';
 
 /// Widget to select a language from a sorted list of names.
 ///
-/// Works with ISO-639 codes (2 char lowercase).
-class InputLanguage extends FormField<String> {
+/// Works with Dart [Locale].
+/// Based on ISO-639 (alpha-2 lowercase language codes).
+class InputLanguage extends FormField<Locale> {
   static const String IMAGE_PATH = 'lib/assets/flags/';
 
   final bool autofocus;
@@ -24,20 +25,19 @@ class InputLanguage extends FormField<String> {
   final double iconSize;
   final bool isDense, isExpanded;
   final double itemHeight;
-  final ValueChanged<String?>? onChanged;
+  final ValueChanged<Locale?>? onChanged;
   final Function()? onTap;
 
-  /// List of ISO-639 alpha-2 lowercase language codes which can be selected.
-  /// `null` will show full list unless [supportedLocales] is provided.
-  final List<String>? selectableLanguages;
+  /// Shows flag on each item of main country
+  /// from which the language is derived.
+  final bool showFlagOnItems;
 
-  /// Flag of main country from which the language derived.
-  /// `false` will not show the flag icon. Default is `true`.
-  final bool showFlag;
+  /// Shows flag on selected language.
+  final bool showFlagOnSelection;
 
-  /// Filter for selectable list of languages.
-  /// `null` will show full list unless [selectableLanguages] is provided.
-  final List<Locale>? supportedLocales;
+  /// Filter for selectable languages.
+  /// `null` will show full list.
+  final List<Locale>? selectableLocales;
   final TextStyle? style;
   final Widget? underline;
 
@@ -63,20 +63,20 @@ class InputLanguage extends FormField<String> {
     this.iconDisabledColor,
     this.iconEnabledColor,
     this.iconSize = 24.0,
-    String? initialValue,
+    Locale? initialValue,
     this.isDense = false,
     this.isExpanded = true,
     this.itemHeight = kMinInteractiveDimension,
     Locale? locale,
     this.onChanged,
-    FormFieldSetter<String>? onSaved,
+    FormFieldSetter<Locale>? onSaved,
     this.onTap,
-    this.selectableLanguages,
-    this.supportedLocales,
+    this.selectableLocales,
     this.style,
     this.underline,
-    this.showFlag = true,
-    FormFieldValidator<String>? validator,
+    this.showFlagOnItems = false,
+    this.showFlagOnSelection = true,
+    FormFieldValidator<Locale>? validator,
     this.withPlatformSelection = false,
   }) : super(
             key: key,
@@ -85,43 +85,16 @@ class InputLanguage extends FormField<String> {
             initialValue: initialValue,
             onSaved: onSaved,
             validator: validator,
-            builder: (FormFieldState<String> state) {
-              //--- Builds one language for display
-              Widget _buildDisplayItem(Language? lang, String langCode) {
-                if (lang == null) {
-                  return Text(''); // could happen to display disabledHint
-                }
-                return Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    (showFlag && lang.country != null)
-                        ? Image.asset(
-                            IMAGE_PATH + lang.country! + '.png',
-                            package: 'input_country',
-                          )
-                        : SizedBox.shrink(),
-                    Flexible(
-                      child: Text(
-                        '  ' + lang.getTranslation(langCode),
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                      ),
-                    ),
-                  ],
-                );
-              }
-
+            builder: (FormFieldState<Locale> state) {
+              //
               //--- Build list of languages
-              List<DropdownMenuItem<String>> _buildLanguageList(
-                  String langCode) {
+              List<DropdownMenuItem<Locale>> _buildLanguageList(
+                  Locale targetLanguage) {
                 List<Language> languages = <Language>[];
                 List<String> filter = <String>[];
                 //--- Prepare filter
-                if (selectableLanguages != null) {
-                  filter.addAll(selectableLanguages);
-                }
-                if (supportedLocales != null) {
-                  supportedLocales.forEach(
+                if (selectableLocales != null) {
+                  selectableLocales.forEach(
                       (Locale locale) => filter.add(locale.languageCode));
                 }
                 //--- Build list of codes. Apply filter
@@ -131,22 +104,23 @@ class InputLanguage extends FormField<String> {
                   }
                 }
                 languages.sort((Language lang1, Language lang2) => lang1
-                    .getTranslation(langCode)
-                    .compareTo(lang2.getTranslation(langCode)));
+                    .getTranslation(targetLanguage)
+                    .compareTo(lang2.getTranslation(targetLanguage)));
                 if (withPlatformSelection) {
                   languages.insert(0, Language.fromPlatform);
                 }
                 return languages
                     .map(
-                      (Language language) => DropdownMenuItem<String>(
-                        value: language.code,
-                        child: _buildDisplayItem(language, langCode),
+                      (Language language) => DropdownMenuItem<Locale>(
+                        value: language.toLocale(),
+                        child: _buildDisplayItem(
+                            language, targetLanguage, showFlagOnItems),
                       ),
                     )
                     .toList();
               }
 
-              void _onChanged(String? value) {
+              void _onChanged(Locale? value) {
                 if (onChanged != null) {
                   onChanged(value);
                 }
@@ -154,19 +128,18 @@ class InputLanguage extends FormField<String> {
               }
 
               //--- Use given locale or active one from platform
-              Locale localeToUse =
+              Locale targetLanguage =
                   locale ?? Localizations.localeOf(state.context);
-              String langToUse = localeToUse.languageCode;
 
               /// List of translated country names
-              List<DropdownMenuItem<String>> languageList =
-                  _buildLanguageList(langToUse);
+              List<DropdownMenuItem<Locale>> languageList =
+                  _buildLanguageList(targetLanguage);
 
-              return DropdownButton<String>(
+              return DropdownButton<Locale>(
                 autofocus: autofocus,
                 disabledHint: disabledHint ??
-                    _buildDisplayItem(
-                        Language.findByCode(state.value), langToUse),
+                    _buildDisplayItem(Language.fromLocale(state.value),
+                        targetLanguage, showFlagOnSelection),
                 dropdownColor: dropdownColor,
                 elevation: elevation ?? 8,
                 focusColor: focusColor,
@@ -183,11 +156,46 @@ class InputLanguage extends FormField<String> {
                 isExpanded: isExpanded,
                 items: languageList,
                 itemHeight: itemHeight,
-                onChanged: enabled ? (String? v) => _onChanged(v) : null,
+                onChanged: enabled ? (Locale? v) => _onChanged(v) : null,
                 onTap: onTap,
                 style: style,
                 underline: underline,
                 value: state.value,
               );
             });
+
+  //--- Builds one language for display
+  static Widget _buildDisplayItem(
+      Language? language, Locale targetLanguage, bool showFlag) {
+    if (language == null) {
+      return Text(''); // could happen to display disabledHint
+    }
+    return showFlag
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              (language.country != null)
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 10.0),
+                      child: Image.asset(
+                        IMAGE_PATH + language.country! + '.png',
+                        package: 'input_country',
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              Flexible(
+                child: Text(
+                  '  ' + language.getTranslation(targetLanguage),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                ),
+              ),
+            ],
+          )
+        : Text(
+            language.getTranslation(targetLanguage),
+            overflow: TextOverflow.ellipsis,
+            softWrap: false,
+          );
+  }
 }

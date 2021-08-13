@@ -58,12 +58,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String? _countryCode1,
-      _currencyCode1,
-      _languageCode1,
-      _countryCode2,
-      _currencyCode2;
-  String _languageCode2 = window.locale.languageCode;
+  String? _countryCode1, _currencyCode1, _countryCode2, _currencyCode2;
+  Locale? _language1;
+  Locale _language2 = window.locale;
 
   @override
   Widget build(BuildContext context) {
@@ -147,12 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
             TableRow(children: [
               Text('Languages'.i18n),
               InputLanguage(
-                initialValue: _languageCode1,
-                onChanged: (String? newCode) =>
-                    setState(() => _languageCode1 = newCode),
+                initialValue: _language1,
+                onChanged: (Locale? newLang) =>
+                    setState(() => _language1 = newLang),
                 withPlatformSelection: true,
               ),
-              Text('$_languageCode1'),
+              Text('$_language1'),
             ]),
           ],
         ),
@@ -214,13 +211,13 @@ class _MyHomePageState extends State<MyHomePage> {
             TableRow(children: [
               Text('Languages'.i18n),
               InputLanguage(
-                initialValue: _languageCode2,
-                onChanged: (String? langCode) => _setNewLanguage(
-                    langCode ?? Language.LANG_CODE_FROM_PLATFORM),
-                supportedLocales: supportedLocales,
+                initialValue: _language2,
+                onChanged: (Locale? newLang) =>
+                    _setNewLanguage(newLang ?? Language.LOCALE_FROM_PLATFORM),
+                selectableLocales: supportedLocales,
                 withPlatformSelection: true,
               ),
-              Text('$_languageCode2'),
+              Text('$_language2'),
             ]),
           ],
         ),
@@ -228,19 +225,19 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _setNewLanguage(String langCode) {
-    if (langCode == Language.LANG_CODE_FROM_PLATFORM) {
-      langCode = Localizations.localeOf(context).languageCode;
+  void _setNewLanguage(Locale localeToSet) {
+    if (localeToSet.languageCode == Language.LANG_CODE_FROM_PLATFORM) {
+      localeToSet = Localizations.localeOf(context);
     }
-    if (langCode != thisAppsLocaleNotifier.value.languageCode) {
+    if (localeToSet != thisAppsLocaleNotifier.value) {
       setState(() {
-        _languageCode2 = langCode;
-        Localization.langCode = langCode;
+        _language2 = localeToSet;
+        Localization.langCode = localeToSet.languageCode;
         thisAppsLocaleNotifier.value =
-            (langCode == Language.LANG_CODE_FROM_PLATFORM)
+            (localeToSet.languageCode == Language.LANG_CODE_FROM_PLATFORM)
                 ? window.locale
                 : supportedLocales
-                    .firstWhere((locale) => (langCode == locale.languageCode));
+                    .firstWhere((locale) => (locale == locale.languageCode));
         // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
         thisAppsLocaleNotifier.notifyListeners();
       });

@@ -1,6 +1,8 @@
 // Copyright 2021 djarjo@djarjo.com
 // Please see the LICENSE file for details.
 
+import 'dart:ui';
+
 import 'package:collection/collection.dart' show IterableExtension;
 
 import 'language.csv.dart';
@@ -43,6 +45,10 @@ class Language {
 
   /// Language code to use locale from platform
   static final String LANG_CODE_FROM_PLATFORM = 'xx';
+
+  /// [Locale] with language code `xx`
+  static final Locale LOCALE_FROM_PLATFORM = Locale(LANG_CODE_FROM_PLATFORM);
+
   static Language fromPlatform =
       Language(code: LANG_CODE_FROM_PLATFORM, name: 'Platform');
 
@@ -57,13 +63,23 @@ class Language {
     return languages.firstWhereOrNull((language) => language.code == langCode);
   }
 
+  static Language? fromLocale(Locale? locale) {
+    return (locale == null) ? null : findByCode(locale.languageCode);
+  }
+
   /// Gets language name translated into given language.
   /// If no translation found then the english name will be returned.
-  String getTranslation(String langCode) {
-    if (langCode != 'en' && translations != null) {
-      return translations?[langCode] ?? name;
+  String getTranslation(Locale targetLanguage) {
+    String targetLangCode = targetLanguage.languageCode;
+    if (targetLangCode != 'en' && translations != null) {
+      return translations?[targetLangCode] ?? name;
     }
     return name;
+  }
+
+  /// Returns language as a Dart [Locale]
+  Locale toLocale() {
+    return Locale(code);
   }
 
   @override
