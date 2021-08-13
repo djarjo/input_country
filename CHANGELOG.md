@@ -1,4 +1,10 @@
-## [2.0.0] - 2020-03-07 - Full null-safety
+## [2.1.0] - 2021-08-13 - Always uses Locale for language
+
+* If there is a language then always [Locale] will be used. This change improves code readability and reduces coding errors.
+* Flags can now be sets separately for items and selection by parameters: [showFlagOnItems] and [showFlagOnSelection]
+* Some country names have been shortened to better fit to small screens
+
+## [2.0.0] - 2021-03-25 - Full null-safety
 
 * Package is completely null-safe
 

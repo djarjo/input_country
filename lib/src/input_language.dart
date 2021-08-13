@@ -82,7 +82,12 @@ class InputLanguage extends FormField<Locale> {
             key: key,
             autovalidateMode: autovalidateMode,
             enabled: enabled,
-            initialValue: initialValue,
+            initialValue: (initialValue == null)
+                ? null
+                : (selectableLocales != null &&
+                        selectableLocales.contains(initialValue))
+                    ? Locale(initialValue.languageCode)
+                    : null,
             onSaved: onSaved,
             validator: validator,
             builder: (FormFieldState<Locale> state) {
@@ -130,6 +135,7 @@ class InputLanguage extends FormField<Locale> {
               //--- Use given locale or active one from platform
               Locale targetLanguage =
                   locale ?? Localizations.localeOf(state.context);
+              targetLanguage = Locale(targetLanguage.languageCode);
 
               /// List of translated country names
               List<DropdownMenuItem<Locale>> languageList =

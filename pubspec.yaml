@@ -1,7 +1,7 @@
 name: input_country
-description: Countries (ISO-3166), Languages (ISO-639) and Currencies (ISO-4217) with choosers (DropdownButton) and flag images
+description: Countries (ISO-3166), Currencies (ISO-4217), Languages (ISO-639) with choosers (DropdownButton) and flag images
 homepage: https://github.com/djarjo/input_country
-version: 2.0.2
+version: 2.1.0
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  pedantic: ^1.11.0
+  pedantic: ^1.11.1
 
 dev_dependencies:
   flutter_test:

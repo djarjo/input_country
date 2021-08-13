@@ -93,7 +93,7 @@ class InputCountry extends FormField<String> {
             builder: (FormFieldState<String> state) {
               //--- Build list of countries
               List<DropdownMenuItem<String>> _buildCountryList(
-                  String langCode, bool showFlag) {
+                  Locale locale, bool showFlag) {
                 List<Country> countries = <Country>[];
                 List<String> filter = <String>[];
                 //--- Prepare filter
@@ -107,13 +107,13 @@ class InputCountry extends FormField<String> {
                   }
                 }
                 countries.sort((Country country1, Country country2) => country1
-                    .getTranslation(langCode)
-                    .compareTo(country2.getTranslation(langCode)));
+                    .getTranslation(locale)
+                    .compareTo(country2.getTranslation(locale)));
                 return countries
                     .map(
                       (Country country) => DropdownMenuItem<String>(
                         value: country.alpha2,
-                        child: _buildItem(country, langCode, showFlag),
+                        child: _buildItem(country, locale, showFlag),
                       ),
                     )
                     .toList();
@@ -129,12 +129,11 @@ class InputCountry extends FormField<String> {
               //--- Use given locale or active one from platform
               Locale localeToUse =
                   locale ?? Localizations.localeOf(state.context);
-              String langToUse = localeToUse.languageCode;
 
               return DropdownButton<String>(
                 autofocus: autofocus,
                 disabledHint: disabledHint ??
-                    _buildItem(Country.findByCode2(state.value), langToUse,
+                    _buildItem(Country.findByCode2(state.value), localeToUse,
                         showFlagOnSelection),
                 dropdownColor: dropdownColor,
                 elevation: elevation ?? 8,
@@ -150,12 +149,12 @@ class InputCountry extends FormField<String> {
                 iconSize: iconSize,
                 isDense: isDense,
                 isExpanded: isExpanded,
-                items: _buildCountryList(langToUse, showFlagOnItems),
+                items: _buildCountryList(localeToUse, showFlagOnItems),
                 itemHeight: itemHeight,
                 onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
                 selectedItemBuilder: (BuildContext ctx) =>
-                    _buildCountryList(langToUse, showFlagOnSelection),
+                    _buildCountryList(localeToUse, showFlagOnSelection),
                 style: style,
                 underline: underline,
                 value: state.value,
@@ -163,7 +162,7 @@ class InputCountry extends FormField<String> {
             });
 
   //--- Builds one country for display
-  static Widget _buildItem(Country? country, String langCode, bool showFlag) {
+  static Widget _buildItem(Country? country, Locale locale, bool showFlag) {
     // could happen to display disabledHint
     if (country == null) {
       return Text('');
@@ -181,7 +180,7 @@ class InputCountry extends FormField<String> {
               ),
               Flexible(
                 child: Text(
-                  country.getTranslation(langCode),
+                  country.getTranslation(locale),
                   overflow: TextOverflow.ellipsis,
                   softWrap: false,
                 ),
@@ -189,7 +188,7 @@ class InputCountry extends FormField<String> {
             ],
           )
         : Text(
-            country.getTranslation(langCode),
+            country.getTranslation(locale),
             overflow: TextOverflow.ellipsis,
             softWrap: false,
           );

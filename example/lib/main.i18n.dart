@@ -24,6 +24,10 @@ extension Localization on String {
       'de': 'Beispiel',
       'es': 'Ejemplo',
     },
+    'In-App Language Selection': {
+      'de': 'App interne Sprachauswahl',
+      'es': 'App interna idioma seleccion',
+    },
     'Languages': {
       'de': 'Sprachen',
       'es': 'Idiomas',
@@ -39,6 +43,10 @@ extension Localization on String {
     'Selection': {
       'de': 'Auswahl',
       'es': 'Selección',
+    },
+    'Select language': {
+      'de': 'Sprache wählen',
+      'es': 'Selección de idioma',
     },
   };
 

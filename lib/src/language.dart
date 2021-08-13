@@ -69,13 +69,8 @@ class Language {
 
   /// Gets language name translated into given language.
   /// If no translation found then the english name will be returned.
-  String getTranslation(Locale targetLanguage) {
-    String targetLangCode = targetLanguage.languageCode;
-    if (targetLangCode != 'en' && translations != null) {
-      return translations?[targetLangCode] ?? name;
-    }
-    return name;
-  }
+  String getTranslation(Locale locale) =>
+      translations?[locale.languageCode] ?? name;
 
   /// Returns language as a Dart [Locale]
   Locale toLocale() {

@@ -1,6 +1,8 @@
 // Copyright 2021 djarjo@djarjo.com
 // Please see the LICENSE file for details.
 
+import 'dart:ui';
+
 import 'package:collection/collection.dart' show IterableExtension;
 
 import 'currency.csv.dart';
@@ -58,12 +60,8 @@ class Currency {
 
   /// Gets currency name translated into given language.
   /// If no translation found then the english name will be returned.
-  String getTranslation(String langCode) {
-    if (langCode != 'en' && translations != null) {
-      return translations?[langCode] ?? name;
-    }
-    return name;
-  }
+  String getTranslation(Locale locale) =>
+      translations?[locale.languageCode] ?? name;
 
   @override
   String toString() {

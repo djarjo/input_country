@@ -84,9 +84,10 @@ class InputCurrency extends FormField<String> {
             onSaved: onSaved,
             validator: validator,
             builder: (FormFieldState<String> state) {
+              //
               //--- Build list of currencies
               List<DropdownMenuItem<String>> _buildCurrencyList(
-                  String langCode, bool showFlag) {
+                  Locale targetLanguage, bool showFlag) {
                 List<Currency> currencies = <Currency>[];
                 List<String> filter = <String>[];
                 //--- Prepare filter
@@ -101,13 +102,13 @@ class InputCurrency extends FormField<String> {
                 }
                 currencies.sort((Currency currency1, Currency currency2) =>
                     currency1
-                        .getTranslation(langCode)
-                        .compareTo(currency2.getTranslation(langCode)));
+                        .getTranslation(targetLanguage)
+                        .compareTo(currency2.getTranslation(targetLanguage)));
                 return currencies
                     .map(
                       (Currency currency) => DropdownMenuItem<String>(
                         value: currency.code,
-                        child: _buildItem(currency, langCode, showFlag),
+                        child: _buildItem(currency, targetLanguage, showFlag),
                       ),
                     )
                     .toList();
@@ -123,12 +124,11 @@ class InputCurrency extends FormField<String> {
               //--- Use given locale or use active one from platform
               Locale localeToUse =
                   locale ?? Localizations.localeOf(state.context);
-              String langToUse = localeToUse.languageCode;
 
               return DropdownButton<String>(
                 autofocus: autofocus,
                 disabledHint: disabledHint ??
-                    _buildItem(Currency.findByCode(state.value), langToUse,
+                    _buildItem(Currency.findByCode(state.value), localeToUse,
                         showFlagOnSelection),
                 dropdownColor: dropdownColor,
                 elevation: elevation ?? 8,
@@ -144,12 +144,12 @@ class InputCurrency extends FormField<String> {
                 iconSize: iconSize,
                 isDense: isDense,
                 isExpanded: isExpanded,
-                items: _buildCurrencyList(langToUse, showFlagOnItems),
+                items: _buildCurrencyList(localeToUse, showFlagOnItems),
                 itemHeight: itemHeight,
                 onChanged: enabled ? (String? v) => _onChanged(v) : null,
                 onTap: onTap,
                 selectedItemBuilder: (BuildContext ctx) =>
-                    _buildCurrencyList(langToUse, showFlagOnSelection),
+                    _buildCurrencyList(localeToUse, showFlagOnSelection),
                 style: style,
                 underline: underline,
                 value: state.value,
@@ -157,7 +157,8 @@ class InputCurrency extends FormField<String> {
             });
 
   //--- Builds one country for display
-  static Widget _buildItem(Currency? currency, String langCode, bool showFlag) {
+  static Widget _buildItem(
+      Currency? currency, Locale targetLanguage, bool showFlag) {
     if (currency == null) {
       return Text('');
     }
@@ -173,7 +174,7 @@ class InputCurrency extends FormField<String> {
                   : SizedBox.shrink(),
               Flexible(
                 child: Text(
-                  '  ' + currency.getTranslation(langCode),
+                  '  ' + currency.getTranslation(targetLanguage),
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                 ),
@@ -181,7 +182,7 @@ class InputCurrency extends FormField<String> {
             ],
           )
         : Text(
-            currency.getTranslation(langCode),
+            currency.getTranslation(targetLanguage),
             overflow: TextOverflow.ellipsis,
             softWrap: true,
           );
